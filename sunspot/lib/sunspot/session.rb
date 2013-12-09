@@ -239,7 +239,10 @@ module Sunspot
     #
     def connection
       @connection ||=
-        self.class.connection_class.connect(:url          => config.solr.url,
+        self.class.connection_class.connect(
+          :use_ssl => true,
+          :verify_mode => OpenSSL::SSL::VERIFY_NONE,
+          :url          => config.solr.url,
                                             :read_timeout => config.solr.read_timeout,
                                             :open_timeout => config.solr.open_timeout)
     end
